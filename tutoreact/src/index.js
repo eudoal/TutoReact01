@@ -33,6 +33,7 @@ class Board extends React.Component {
   state = {
     squares: Array(9).fill(null),
     xIsNext: true,
+    contador: 0,
   };
 
   handleClick(i) {
@@ -43,29 +44,33 @@ class Board extends React.Component {
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       squares: squares,
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
+      contador: this.state.contador + 1,
     });
-    console.log(squares);
-    console.log(this.state.squares);
   }
-  
+
   renderSquare(i) {
     return (
-      <Square 
+      <Square
         value={this.state.squares[i]}
-        onClick={ () => this.handleClick(i)}
-        //onClick={this.handleClick(i)}
+        onClick={() => this.handleClick(i)}
+      //onClick={this.handleClick(i)}
       />
     );
   }
 
   render() {
     const winner = calcularteWinner(this.state.squares);
+    console.log(this.state.squares);
+    console.log(this.state.contador);
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
-    } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X': 'O');
+    }
+    else {
+      this.state.contador === this.state.squares.length ?
+        status = 'FIN DE LA PARTIDA' :
+        status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
     }
 
     return (
