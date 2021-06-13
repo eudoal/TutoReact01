@@ -65,17 +65,17 @@ class Board extends React.Component {
     console.log(this.state.contador);
     let status;
     if (winner) {
-      status = 'Winner: ' + winner;
+      status = 'EL GANADOR ES: ' + winner;
     }
     else {
       this.state.contador === this.state.squares.length ?
-        status = 'FIN DE LA PARTIDA' :
+        status = '¡¡¡EMPATE!!!' :
         status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
     }
 
     return (
       <div>
-        <div className="status">{status}</div>
+        <h3 className="status">{status}</h3>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
